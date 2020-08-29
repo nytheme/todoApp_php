@@ -13,6 +13,7 @@
 	// var_dump($todos);
 	// exit;
 
+	
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@
 <body>
 	<div id="container">
 		<h1>Todos</h1>
-		<form action="">
+		<form action="" id="new_todo_form">
 			<input type="text" id="new_todo" placeholder="what neesd to be done?">
 		</form>
 		<ul id="todos">
@@ -38,6 +39,12 @@
 				<div class="delete_todo">x</div>
 			</li>
 		<?php endforeach; ?>
+		<!-- todo.js clone()用の隠し要素 -->
+			<li id="todo_template" data-id="">
+				<input type="checkbox" class="update_todo">
+				<span class="todo_title"></span>
+				<div class="delete_todo">x</div>
+			</li>
 		</ul>
 	</div>
 	<!-- CSRF対策：Session の Token をフォームから送信したいので埋め込む -->

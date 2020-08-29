@@ -12,9 +12,9 @@ $todoApp = new \MyApp\Todo();
 //POSTされたときだけ処理する
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	try {
-		//配列を結果で返すようにする
+		//Todo.php のpostファンクションの返り値を$res に格納する
 		$res = $todoApp->post();
-		//ヘッダーに「json形式のデータ」と指定
+		//「json形式のデータ」と指定しTodo.phpからの返り値をヘッダーに格納
 		header('Content-Type: application/json');
 		echo json_encode($res);
 		exit;

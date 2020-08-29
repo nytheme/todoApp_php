@@ -42,6 +42,7 @@
 			}
 			//modeが渡ってきたらそれに応じて処理を振り分ける
 			switch ($_POST['mode']) {
+				// それぞれのファンクションの返り値をさらにpost()に返し、_ajax.phpに渡す
 				case 'update':
 					return $this->_update();
 				case 'create':
@@ -94,7 +95,19 @@
 		}
 
 		private function _create() {
-			
+			if (!isset($_POST['title']) || $_POST['title'] === '') {
+				throw new \Exception('[create] title not set!');
+			}
+	
+			$sql = "insert into todos (title) values (:title)";
+			$stmt = $this->_db->prepare($sql);
+			$stmt->execute([':title' => $_POST['title']]);
+	
+			return [
+				//lastInsertId()：PDOで最後に登録したデータのIDを取得する
+				//DBに登録されたidを todo.js の create に渡す
+				'id' => $this->_db->lastInsertId()
+			];
 		}
 
 		private function _delete() {
